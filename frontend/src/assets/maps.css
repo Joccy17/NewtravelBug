@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;
+}
+
+.navigation{
+    display: flex;
+    align-items: center;
+    margin-left: 6%;
+    width: 89%;
+    justify-content: space-between;
+}
+.navigation .navbar {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+.navigation .navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.78rem;
+}
+.navigation .navbar .Home {
+    color:rgb(110 53 180);
+}
+.Homepage {
+    position: relative;
+}
+.Homepage img {
+    width: 100%;
+    margin-bottom: -1%;
+}
+.footer{
+    display:flex;
+    justify-content: space-around;
+
+}
+.foot{
+    background-color: black;
+
+}
+.text-input {
+    padding: 9px;
+    width: 45%;
+    margin-left: 11%;
+}
+.travelBug {
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    gap: 2rem;
+    margin: 2%;
+    line-height: 2rem;
+    width: 26%;
+    margin-left: 7%;
+    color: white;
+    font-family: sans-serif;
+}
+.travelBug p{
+    color: #DCDBDB;
+    opacity: 0.9;
+    font-size: small;
+}
+.sub-field{
+    margin-top: 3%;
+    color: white;
+    width: 30%;
+    margin-left: 35%;
+
+}
+.sub-field p {
+    margin-left: 11%;
+    font-size: 14px;
+}
+.sub-field select {
+    background-color: #754ace;
+    padding: 9px;
+}
+.lowerText {
+    margin-top: 3%;
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.8;
+}

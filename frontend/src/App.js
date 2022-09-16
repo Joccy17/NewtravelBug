@@ -1,8 +1,14 @@
 import './assets/style.css';
 import Router from './Router';
+// import Home from './containers/Home';
 
 function App() {
-    return <Router />;
+    return(
+        <>
+     <Router />;
+   
+        </>
+    )
 }
 
 export default App;

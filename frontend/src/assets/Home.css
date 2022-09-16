@@ -1,0 +1,272 @@
+*{
+    margin:0;
+    padding: 0;
+}
+.header{
+    position: relative;
+}
+.navigation{
+    display: flex;
+    margin-left: 6%;
+    width: 89%;
+    align-items: center;
+    justify-content: space-between;
+}
+.navigation .navbar {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+}
+
+.navigation .navbar .Home {
+    color:rgb(110 53 180);
+}
+.navigation .navbar a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.78rem;
+}
+.hollywood img{
+    width: 100%;
+}
+.Homepage{
+    position: relative;
+}
+.Homepage img {
+    width: 100%;
+}
+.Homepage .search{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    z-index: 3;
+}
+.Homepage .search img{
+    width: 2vw;
+    position: absolute;
+    right: 33%;
+    top: 73%;
+    width: 2.7%;
+}
+.search h1{
+    color: white;
+    font-size: 4.5vw;
+    font-family: sans-serif;
+    margin-left: -20%;
+}
+.search input{
+    padding: 3% 46% 3.7% 8%;
+    border: white;
+    border-radius: 15px;
+    margin-left: 1%;
+}
+h1{
+    text-align: center;
+    margin: 5px;
+}
+.heading1{
+    text-align: center;
+}
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3%;
+}
+.content p {
+    text-align: center;
+}
+
+.header2 {
+    position: relative;
+}
+.shade {
+    position: absolute;
+    height: 99%;
+    width: 100%;
+    top: 0;
+    background-color:  rgba(59, 39, 84,0.6);
+}
+.grid {
+    margin: 2%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2%;
+   
+}
+.container {
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.container .like {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+}
+.container img {
+    width: 100%;
+}
+.Video {
+    position: relative;
+    margin-top:19% ;
+    
+}
+
+.Video img{
+    width: 100%;
+}
+.Video .caption p{
+    font-size: 2vw; 
+    color: white; 
+    font-family: 'Times New Roman', Times, serif;
+}
+.Video .innerImage img{
+    position: absolute;
+    width: 40%;
+    top: 30%;
+    left: 30%;
+}
+h5{
+    color: white;
+}
+.Video .caption {
+    position: absolute;
+    top: 7%;
+    width: 100%;
+    text-align: center;
+}
+
+#wavywhite{
+    width: 2vw;
+}
+.Video .play img{
+    width: 3vw;
+    position: absolute;
+    top: 52%;
+    left: 48%;
+}
+.subscribe {
+    position: relative;
+}
+.subscribe .shade{
+    position: absolute;
+    height: 99%;
+    width: 100%;
+    top: 0%;
+    background-color:  rgba(59, 39, 84,0.6);
+    
+}
+.subscribe .discount p{
+    position: center; 
+    font-size: 1vw; 
+    color: white; 
+    top: 38%; 
+    left: 46%;
+}
+.subscribe p{
+    position: absolute;
+    top: 40%;
+    left: 48%;
+    position: center; 
+    font-size: 3vw; 
+    color: white; 
+    top: 20%; 
+    left: 33%;
+}
+.subscribe img{
+    width: 100%;
+}
+.text::placeholder {
+    color: white;
+}
+
+
+.subscribe .sub-button input {
+    
+    padding: 1% 60% 0.6% 10%;
+    background-color: inherit;
+    border-radius: 23px;
+    color: white;
+    border: white;
+    font: message-box;
+    border-style: solid;
+}
+.map {
+    position: relative;
+    width: 100%;
+    z-index: 3;
+}
+.map img {
+    width: 100%;
+}
+
+.sub-button{
+    display:flex;
+    gap:3%;
+    position: absolute;
+    z-index: 3;
+    left: 31%;
+    top: 58%;
+}
+
+.sub-button button{
+    padding:5%;
+    border-radius: 17px;
+    border:none;
+    color: #754ace;
+}
+.footer{
+    display:flex;
+    justify-content: space-around;
+
+}
+.foot{
+    background-color: black;
+
+}
+.text-input {
+    padding: 9px;
+    width: 45%;
+}
+.travelBug {
+    display: flex;
+    justify-content: space-between;
+    text-align: justify;
+    gap: 2rem;
+    margin: 2%;
+    line-height: 2rem;
+    width: 26%;
+    color: white;
+    font-family: sans-serif;
+}
+.travelBug p{
+    color: #DCDBDB;
+    opacity: 0.9;
+    font-size: small;
+}
+.sub-field{
+    margin-top: 3%;
+    color: white;
+    width: 30%;
+    margin-left: 35%;
+
+}
+.sub-field select {
+    background-color: #754ace;
+    padding: 9px;
+}
+.lowerText {
+    margin-top: 3%;
+    color: white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.8;
+}
+
+@media screen and (max-width:650px){
+    
+    .subscribe .sub-button input {
+        padding: 1% 1% 0.6% 10%;
+    }
+}

@@ -8,6 +8,7 @@ if (process.env.REACT_APP_ENVIRONMENT && process.env.REACT_APP_ENVIRONMENT === '
     baseURL = 'http://127.0.0.1:8000';
 }
 
+
 const api = axios.create({
     baseURL: baseURL,
     headers: {
@@ -32,33 +33,53 @@ api.interceptors.request.use(
 );
 
 export default class API {
-    getPosts = async params => {
-        try {
-            const response = await api.get('/posts/', { params });
-            return response.data;
-        } catch (error) {
-            throw new Error(error);
+    getPlaces = async (search, category, id) => {
+        let url = '/places/';
+        let query = new URLSearchParams();
+        if (search) {
+            query.append('search', search);
         }
-    };
-    addPost = async postBody => {
-        const formData = new FormData();
-
-        for (const key in postBody) {
-            formData.append(key, postBody[key]);
+        if (category) {
+            query.append('category', category);
+        }
+        if (id) {
+            query.append('id', id);
         }
 
-        try {
-            const response = await api.post('/posts/add/', formData);
-            return response.data;
-        } catch (error) {
-            throw new Error(error);
+        if (query.toString() !== '') {
+            url += '?' + query.toString();
         }
+
+        const places = await api
+            .get(url)
+            .then(response => {
+                return response.data;
+            })
+            .catch((error) => {
+                throw new Error(error);
+            });
+        return places;
     };
-    deletePost = async id => {
-        try {
-            return await api.delete(`/posts/delete/${id}/`);
-        } catch (error) {
-            throw new Error(error);
+    getCategories = async (id) => {
+        let url1 ;
+
+        let query1 = new URLSearchParams();
+        if (id) {
+       url1=`/categories/?id=${id}`
+            
         }
+        else{
+            url1='/categories/'
+        }
+
+        const categories = await api
+            .get(url1)
+            .then(response => {
+                return response.data;
+            })
+            .catch(error => {
+                throw new Error(error);
+            });
+        return categories;
     };
 }

@@ -1,87 +1,106 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../assets/img/loading.gif';
-import postImage from '../assets/img/newspaper-icon-png.jpg';
-import PostForm from '../components/Posts/PostForm';
-import Post from '../components/Posts/Post';
-import { fetchPosts } from '../reducks/posts/operations';
-import { getPosts } from '../reducks/posts/selectors';
+import React, { useEffect } from "react";
+import Footer from "../components/common/Footer";
+import Header from "../components/common/Header";
+import "../assets/Home.css";
+import shape from "../assets/img/Shape1.png";
+import search from "../assets/img/searchicon.png";
+import background from "../assets/img/background.png";
+
+import play from "../assets/img/Play icon.png";
+import video from "../assets/img/videobackground.png";
+import whiteShape from "../assets/img/White Shape 1.png";
+import innerImage from "../assets/img/Discover inner image.png";
+import subscribe from "../assets/img/Subscribe background.png";
+import map from "../assets/img/map.png";
+import Search from "../components/common/Search";
+
+import CategoriesList from "../components/common/CategoriesList";
+import Grid from "../components/common/Grid";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlaces } from "../reducks/places/selectors";
+import { fetchPlaces } from "../reducks/places/operations";
+import { fetchCategories } from "../reducks/categories/operation";
+import { fetchFromLocalStorage } from "../reducks/favorites/operations";
+import { getCategories } from "../reducks/categories/selectors";
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const selector = useSelector(state => state);
-    const posts = getPosts(selector);
-    let [page, setPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const places = getPlaces(selector);
+  useEffect(() => {
+    dispatch(fetchPlaces());
+  }, []);
+  const categories = getCategories(selector);
+  console.log("categories", categories);
+  console.log("places", places);
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, []);
 
-    useEffect(() => {
-        dispatch(fetchPosts({ page }));
-        // eslint-disable-next-line
-    }, []);
+  return (
+    <>
+      <Header />
 
-    // Infinite Scroll Pagination Flow
-    const observer = useRef();
+      <section class="Homepage">
+        <img src={background} alt="" />
 
-    // Reference to a very last post element
-    const lastPostElement = useCallback(
-        node => {
-            if (isLoading) return;
-            // Disconnect reference from previous element, so that new last element is hook up correctly
-            if (observer.current) {
-                observer.current.disconnect();
-            }
+        <Search img={search} />
+        <div class="shade"></div>
+      </section>
 
-            // Observe changes in the intersection of target element
-            observer.current = new IntersectionObserver(async entries => {
-                // That means that we are on the page somewhere, In our case last element of the page
-                if (entries[0].isIntersecting && posts.next) {
-                    // Proceed fetch new page
-                    setIsLoading(true);
-                    setPage(++page);
-                    await dispatch(fetchPosts({ page }));
-                    setIsLoading(false);
-                }
-            });
+      <div class="heading1">
+        <h1>Natural Wonders</h1>
+        <img src={shape} alt="" />
+      </div>
+      <section class="content">
+        {categories.map((category) => {
+          return <CategoriesList key={category.id} category={category} />;
+        })}
+      </section>
 
-            // Reconnect back with the new last post element
-            if (node) {
-                observer.current.observe(node);
-            }
-        },
-        // eslint-disable-next-line
-        [posts.next]
-    );
+      <div class="heading1">
+        <h1>Tourist Attractions in USA</h1>
+        <img src={shape} alt="" />
+      </div>
+      <section class="grid">
+        {places &&
+          places.length > 0 &&
+          places.map((place) => <Grid place={place} />)}
+      </section>
+      <section class="Video">
+        <img src={video} alt="" class="src" />
+        <div class="caption">
+          <h5>DISCOVER</h5>
+          <p>Watch Our Video Tour</p>
+          <img src={whiteShape} id="wavywhite" alt="" />
+        </div>
+        <div class="innerImage">
+          <img src={innerImage} alt="" />
+        </div>
+        <div class="play">
+          <img src={play} alt="" />
+        </div>
+      </section>
+      <section>
+        <div class="subscribe">
+          <img src={subscribe} alt="" class="src" />
+          <div class="shade"></div>
+          <p>Get 10% Off on Your Next Travel</p>
+          <div className="discount">
+            <p>Maximum discount $1000 per person</p>
+          </div>
 
-    return (
-        <section className="content">
-            <PostForm />
-            <section className="posts">
-                {posts.results.length > 0 ? (
-                    <ul>
-                        {posts.results.map((post, index) => {
-                            return (
-                                <Post
-                                    ref={index === posts.results.length - 1 ? lastPostElement : null}
-                                    key={post.id}
-                                    post={post}
-                                />
-                            );
-                        })}
-                    </ul>
-                ) : (
-                    <div className="no-post">
-                        <img width="72" src={postImage} alt="icon" />
-                        <p>No posts here yet...</p>
-                    </div>
-                )}
-                {isLoading && (
-                    <div className="loading">
-                        <img src={Loading} className="" alt="" />
-                    </div>
-                )}
-            </section>
-        </section>
-    );
+          <div class="sub-button">
+            <input type="text" class="text" placeholder="Enter your email" />
+            <button>SUBSCRIBE</button>
+          </div>
+        </div>
+      </section>
+      <div class="map">
+        <img src={map} alt="" class="src" />
+      </div>
+      <Footer />
+    </>
+  );
 };
-
 export default Home;

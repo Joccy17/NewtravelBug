@@ -1,26 +1,34 @@
-import {
-  applyMiddleware,
-  combineReducers,
-  createStore as configureStore,
+import { 
+    legacy_createStore as reduxCreateStore,
+    combineReducers,
+    applyMiddleware,
+    compose
 } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { logger } from 'redux-logger';
+import {composeWithDevTools } from 'redux-devtools-extension'
+import {connectRouter, routerMiddleware} from "connected-react-router";
 import thunk from 'redux-thunk';
+import { CategoryReducer } from '../categories/reducers';
+import { FavoritesReducer } from '../favorites/reducers';
+import { PlacesReducer } from '../places/reducers';
 
-import { PostsReducer } from '../posts/reducers';
+// import { PostsReducer } from '../posts/reducers';
 
-const rootReducer = combineReducers({
-  posts: PostsReducer,
-});
-
-export default function configureStores(preloadedState) {
-  const middlewares = [logger, thunk];
-  const middlewareEnhancer = applyMiddleware(...middlewares);
-
-  const enhancers = [middlewareEnhancer];
-  const composedEnhancers = composeWithDevTools(...enhancers);
-
-  const store = configureStore(rootReducer, preloadedState, composedEnhancers);
-
-  return store;
+export default function createStore(history) {
+    return reduxCreateStore(
+        combineReducers({
+            router: connectRouter(history),
+            places:PlacesReducer,
+            categories:CategoryReducer,
+            favorites: FavoritesReducer,
+            
+       }),
+       composeWithDevTools(
+        applyMiddleware(
+            routerMiddleware(history),
+            thunk
+        ),
+        // DEBUG MODE
+        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+       )
+    )
 }
